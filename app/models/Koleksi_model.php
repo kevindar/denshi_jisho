@@ -35,9 +35,9 @@ class Koleksi_model {
             JOIN Bun ON Bun.ID_Kata = Moji.ID
             JOIN Pola_Kalimat ON Pola_Kalimat.ID_Kalimat = Bun.ID
             JOIN Translate_Bun ON  Translate_Bun.ID_Kalimat = Bun.ID
-        WHERE  Koleksi.ID =: dudu'
+        WHERE  Koleksi.ID = ' . $id
         );
-        $this->db->bind('dudu', $id);
+        // $this->db->bind('dudu', $id);
         return $this->db->resultSet();
     }
 }

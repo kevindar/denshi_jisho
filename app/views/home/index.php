@@ -11,7 +11,7 @@
             <div class="col">
                 <div class="card">
                     <?php foreach($data['koleksi'] as $koleksi) : ?>
-                        <img src="..\public\img\sample.jpg" class="card-img-top" alt="...">
+                        <img src="..\public\img\<?= $koleksi['Nama']?>.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"> <?= $koleksi['Nama']?> </h5>
                             <p class="card-text">Dipelajari dalam Buku Marugoto <?= $koleksi['Buku']?> Bab <?= $koleksi['Bab']?></p>
