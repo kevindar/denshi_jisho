@@ -1,6 +1,6 @@
 <div class="container mt-5">
+    <h3><?= $data['koleksi'][0]['Nama']?></h3>
     <?php foreach($data['koleksi'] as $koleksi) : ?>
-    <h3><?= $koleksi['Nama']?></h3>
         <div class="accordion">
             <div class="open">
                 <div class="accordion-item">
@@ -25,7 +25,7 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body"> 
-                        <p>Contoh kalimat : <?= mb_convert_encoding($koleksi['Kalimat'], "UTF-8")?></p>
+                        <p>Contoh kalimat : <?= $koleksi['Kalimat']?></p>
                         <p>Arti kalimat : <?= $koleksi['Arti_Kalimat']?></p>
                         <p>Pola Kalimat <?= $koleksi['Pola']?></p>
                     </div>

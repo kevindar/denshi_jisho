@@ -35,10 +35,41 @@ class Koleksi_model {
             JOIN Bun ON Bun.ID_Kata = Moji.ID
             JOIN Pola_Kalimat ON Pola_Kalimat.ID_Kalimat = Bun.ID
             JOIN Translate_Bun ON  Translate_Bun.ID_Kalimat = Bun.ID
-        WHERE  Koleksi.ID = ' . $id
+        WHERE  Koleksi.ID = :id'
         );
-        // $this->db->bind('dudu', $id);
+        $this->db->bind('id', $id);
         return $this->db->resultSet();
+    }
+
+    public function tambahKoleksi($data)
+    {
+        $query =   "INSERT INTO koleksi
+                    SELECT * FROM ( 
+                        SELECT
+                        '', :Nama, :Bab, :Buku
+                        ) AS tmp
+                    WHERE NOT EXISTS (
+                        SELECT Nama FROM koleksi WHERE Nama=':Nama'
+                    )";
+        $this->db->query($query);
+        $this->db->bind('Nama', $data['Nama']);
+        $this->db->bind('Bab', $data['Bab']);
+        $this->db->bind('Buku', $data['Buku']);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function hapusKoleksi($id)
+    {
+        $query = "DELETE FROM koleksi WHERE ID = :id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
     }
 }
 

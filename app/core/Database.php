@@ -17,7 +17,7 @@ class Database {
         $option = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"                // PENTING UNTUK TAMPILKAN CHAR JEPANG
         ];
 
         try {
@@ -49,11 +49,19 @@ class Database {
                     $type = PDO::PARAM_STR;
             }
         }
+        $this->stmt->bindValue($param, $value, $type);
     }
 
     public function execute()
     {
-        $this->stmt->execute();
+        try {
+            //code...
+            $this->stmt->execute();
+        } catch (PDOException $e) {
+            Flasher::setFlash($e->getMessage() , '' , 'danger' , '');
+            header('Location: ' . BASEURL);
+            exit;
+        }
     }
 
     public function resultSet()
@@ -66,6 +74,11 @@ class Database {
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
     }
 }
 
