@@ -10,8 +10,8 @@ class Koleksi extends Controller {
         if( $data['koleksi'] != null) {
             $this->view('koleksi/detail', $data);
         } else {
-            $data['koleksi'] = $this->model('Koleksi_model')->getAllKoleksi();
-            $this->view('words/new', $data);
+            // $data['koleksi'] = $this->model('Words_model')->tambahKata($data);
+            $this->view('words/new', $id);
         }
         $this->view('templates/footer');
     }
