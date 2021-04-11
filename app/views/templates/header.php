@@ -24,7 +24,7 @@
           <a class="nav-link" href="<?= BASEURL?>/about">Words</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Kanji</a>
+          <a class="nav-link" href="<?= BASEURL?>/kanji">Kanji</a>
         </li>
       </ul>
     </div>

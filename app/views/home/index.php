@@ -24,7 +24,7 @@
               <h5 class="card-title"> <?= $koleksi['Nama'] ?> </h5>
               <p class="card-text">Dipelajari dalam Buku Marugoto <?= $koleksi['Buku'] ?> Bab <?= $koleksi['Bab'] ?></p>
 
-              <div class="card-footer">
+              <div class="card-footer mt-auto">
                 <a href="<?= BASEURL; ?>/koleksi/detail/<?= $koleksi['ID'] ?>" class="btn btn-primary">Lihat</a>
                 <a href="<?= BASEURL; ?>/koleksi/hapus/<?= $koleksi['ID'] ?>" class="btn btn-danger" onclick="return confirm('Yakin hapus koleksi?')">Hapus</a>
               </div>

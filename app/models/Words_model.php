@@ -2,10 +2,8 @@
 
 class Words_model {
 
-    private $id_koleksi;
     private $db;
-    private $id_moji;
-    private $id_bun;
+
 
     public function __construct()
     {
@@ -15,18 +13,16 @@ class Words_model {
     public function tambahKata($data)
     {
         $id_koleksi = $data;
-        $query =   "START TRANSACTION;
-                        INSERT INTO Moji VALUES('', :Kata);
-                    SELECT @moji_id:=MAX(ID_Moji) FROM Moji;
+        $query =   "INSERT INTO Moji VALUES('', :Kata);
+                        SET @moji_id = LAST_INSERT_ID();
                     INSERT INTO indeks (ID_Kata, ID_Koleksi)
-                        VALUES (@moji_id, " . $this->id_koleksi . ");
-                        INSERT INTO Kategori VALUES (@moji_id, :Kategori_Kata);
-                        INSERT INTO Translate_Moji VALUES(@moji_id, :Arti_Kata);
-                        INSERT INTO Bun VALUES ('', @moji_id, :Kalimat);
-                    SELECT @bun_id:=MAX(ID_Bun) FROM Bun;
-                        INSERT INTO Translate_Bun VALUES (@bun_id, :Pola_Kalimat);
-                        INSERT INTO Pola_Kalimat VALUES (@bun_id, :Arti_Kalimat);
-                    COMMIT;";
+                        VALUES (@moji_id, " . $data . ");
+                    INSERT INTO Kategori VALUES (@moji_id, :Kategori_Kata);
+                    INSERT INTO Translate_Moji VALUES(@moji_id, :Arti_Kata);
+                    INSERT INTO Bun VALUES ('', @moji_id, :Kalimat);
+                        SET @bun_id = LAST_INSERT_ID();
+                    INSERT INTO Translate_Bun VALUES (@bun_id, :Pola_Kalimat);
+                    INSERT INTO Pola_Kalimat VALUES (@bun_id, :Arti_Kalimat);";
                     $this->db->query($query);
 
         $this->db->bind('Kata', $data['Kata']);
